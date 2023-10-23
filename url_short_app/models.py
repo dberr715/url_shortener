@@ -15,7 +15,7 @@ class UrlData(models.Model):
     title = models.CharField()
     longUrl = models.CharField()
     shortUrl = models.CharField()
-    userId = models.CharField()
+    userId = models.ForeignKey(UserData, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
