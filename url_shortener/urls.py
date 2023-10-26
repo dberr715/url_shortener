@@ -18,10 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from url_short_app import views
 from rest_framework import routers
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r"urldata", views.UrlDataViewSet)
 router.register(r"userdata", views.UserDataViewSet)
 
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include(router.urls))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include(router.urls)),
+    path("yeet/<str:short_url>", views.RedirectView.as_view(), name="url-redirect"),
+    path("token/", views.CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token_refresh"),
+    path("logout/", views.LogoutView.as_view(), name="logout"),
+]

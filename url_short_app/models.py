@@ -12,9 +12,9 @@ class UserData(models.Model):
 
 
 class UrlData(models.Model):
-    title = models.CharField()
-    longUrl = models.CharField()
-    shortUrl = models.CharField()
+    title = models.CharField(max_length=100)
+    longUrl = models.CharField(max_length=100)
+    shortUrl = models.CharField(max_length=100)
     userId = models.ForeignKey(UserData, on_delete=models.CASCADE)
 
     def __str__(self):
